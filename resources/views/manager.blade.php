@@ -5,5 +5,4 @@
         {{ session('success') }}
     </div>
 @endif
-<h1>thanh</h1>
 @endsection

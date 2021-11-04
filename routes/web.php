@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,6 @@ Route::get('forgotPassword', [RegisterController::class, 'showForgetPasswordForm
 Route::post('forgotPassword', [RegisterController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [RegisterController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [RegisterController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+// Users
+Route::resource('user', UserController::class);
