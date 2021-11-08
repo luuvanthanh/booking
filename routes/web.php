@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -22,7 +23,7 @@ Route::group(['middleware' => ['checklogin']], function () {
     // Route::get('home', function () {
     //     return view('manager');
     // })->name('home');
-    Route::get('home', [HomeController::class, 'index']);
+    Route::get('home', [HomeController::class, 'index'])->name('home');
 });
 // Login
 Route::get('login', [LoginController::class, 'getLogin'])->name('getLogin');
@@ -41,3 +42,11 @@ Route::post('reset-password', [RegisterController::class, 'submitResetPasswordFo
 
 // Users
 Route::resource('user', UserController::class);
+
+// booking
+Route::post('booking', [BookingController::class, 'postRoom'])->name('postRoom');
+
+// Ajax
+Route::group(['prefix' => 'ajax'], function(){
+   Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
+});

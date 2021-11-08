@@ -126,8 +126,11 @@ body {
     border-radius: 5px;
   }
 
-  .form-an {
-    background-color: rgb(73, 150, 73);
+  input[type=radio]:disabled {
+    color: cadetblue;
+  }
+  input[type=radio]:enabled {
+    background: #ffff00;
   }
   
   /*Media Querie*/

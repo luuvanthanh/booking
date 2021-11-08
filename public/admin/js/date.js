@@ -7,3 +7,9 @@ $(document).ready(
             });
         }
 );
+// Add class
+// function myFunction() {
+//     var element = document.getElementById("active").value;
+//     console.log(element);
+// }
+
