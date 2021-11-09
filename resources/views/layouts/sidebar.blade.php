@@ -51,6 +51,30 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-users"></i>
+              <p>
+                Manager Room
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('room.index') }}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Room</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('room.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Room</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Department\DepartmentRepositoryInterface::class,
             \App\Repositories\Department\DepartmentRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\Room\RoomRepositoryInterface::class,
+            \App\Repositories\Room\RoomRepository::class
+        );
     }
 
     /**

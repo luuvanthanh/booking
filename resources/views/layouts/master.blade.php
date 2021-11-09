@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Admin')</title>
     @include('layouts.css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
     <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
