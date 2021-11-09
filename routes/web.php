@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Admin\UserController;
@@ -47,6 +48,9 @@ Route::resource('user', UserController::class);
 
 // Rooms
 Route::resource('room', RoomController::class);
+
+// Department
+Route::resource('department', DepartmentController::class);
 
 // Upload
 Route::post('upload/image', [UploadController::class, 'store']);

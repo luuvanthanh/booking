@@ -16,6 +16,13 @@ class DepartmentRepository extends BaseRepository implements DepartmentRepositor
         return $this->model->get();
     }
 
+    public function getAll()
+    {
+        $users = $this->model::paginate(config('app.paginate_department'));
+
+        return $users;
+    }
+
     public function find($id)
     {
         return Department::pluck('name', 'id')->toArray();

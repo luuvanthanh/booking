@@ -2,8 +2,9 @@
 
 return [
 
-    'paginate_user' => 10,
+    'paginate_user' => 9,
     'paginate_room' => 5,
+    'paginate_department' => 5,
 
     /*
     |--------------------------------------------------------------------------

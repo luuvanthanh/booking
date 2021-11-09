@@ -5,6 +5,9 @@
         <div class="form-group">
             <label>Room Number</label>
             <input type="text" class="form-control" name="roomNumber" placeholder="Enter Room number">
+            @if ($errors->has('roomNumber'))
+                <div class="error">{{ $errors->first('roomNumber') }}</div>
+            @endif
         </div>
         <div class="form-group">
             <label>People</label>
@@ -13,6 +16,9 @@
         <div class="form-group">
             <label>Avartar</label>
             <input type="file" class="form-control" name="file" id="upload" placeholder="Enter Room number">
+            @if ($errors->has('file'))
+                <div class="error">{{ $errors->first('file') }}</div>
+            @endif
             <div id="image_show">
 
             </div>
