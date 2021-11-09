@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => ['checklogin']], function () {
-    Route::get('home', function () {
-        return view('manager');
-    })->name('home');
+    // Route::get('home', function () {
+    //     return view('manager');
+    // })->name('home');
+    Route::get('home', [HomeController::class, 'index'])->name('home');
 });
 // Login
 Route::get('login', [LoginController::class, 'getLogin'])->name('getLogin');
@@ -35,3 +41,20 @@ Route::get('forgotPassword', [RegisterController::class, 'showForgetPasswordForm
 Route::post('forgotPassword', [RegisterController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [RegisterController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [RegisterController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+// Users
+Route::resource('user', UserController::class);
+
+// Rooms
+Route::resource('room', RoomController::class);
+
+// Upload
+Route::post('upload/image', [UploadController::class, 'store']);
+
+// booking
+Route::post('booking', [BookingController::class, 'postRoom'])->name('postRoom');
+
+// Ajax
+Route::group(['prefix' => 'ajax'], function(){
+   Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
+});
