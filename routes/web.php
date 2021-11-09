@@ -27,6 +27,7 @@ Route::group(['middleware' => ['checklogin']], function () {
     //     return view('manager');
     // })->name('home');
     Route::get('home', [HomeController::class, 'index'])->name('home');
+
 });
 // Login
 Route::get('login', [LoginController::class, 'getLogin'])->name('getLogin');
@@ -62,3 +63,4 @@ Route::post('booking', [BookingController::class, 'postRoom'])->name('postRoom')
 Route::group(['prefix' => 'ajax'], function(){
    Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
 });
+
