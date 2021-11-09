@@ -2,6 +2,10 @@
 
 return [
 
+    'paginate_user' => 9,
+    'paginate_room' => 5,
+    'paginate_department' => 5,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

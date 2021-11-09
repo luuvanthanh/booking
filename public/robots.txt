@@ -1,2 +1,12 @@
 User-agent: *
 Disallow:
+
+
+Báo cáo hôm nay
+1. Công việc hôm nay đã làm:
+- Booking thành công(sử dụng ajax hiển thị được thời gian chưa book có kiểm tra điều kiện idroom và date, gửi mail đến người dùng).
+- Thiết kế trang quản lý phòng họp( list phòng, upload image sử dụng ajax)
+2. Công việc ngày mai:
+- Quản lý phòng ban và làm tiếp quản lý phòng họp.
+3. Khó khắn
+- Hiện tại thì chưa.

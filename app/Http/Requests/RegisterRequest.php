@@ -43,7 +43,7 @@ class RegisterRequest extends FormRequest
             'password.required' => ':attribute không được để trống',
             'password.same' => ':attribute phải giống password confirm',
             'password.min' => ':attribute không được nhỏ hơn 6 ký tự',
-            'password_confirmation.reuired' => ':attribute không được để trống',
+            'password_confirmation.required' => ':attribute không được để trống',
             'password_confirmation.min' => ':attribute không được nhỏ hơn 6 ký tự',
             'address.required' => ':attribute không được để trống',
             'phone.required' => ':attribute không được để trống',
