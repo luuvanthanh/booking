@@ -20,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return redirect()->route('home');
-});
+
 
 Route::group(['middleware' => ['checklogin']], function () {
     // Route::get('home', function () {
@@ -65,5 +63,4 @@ Route::post('booking', [BookingController::class, 'postRoom'])->name('postRoom')
 Route::group(['prefix' => 'ajax'], function(){
    Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
 });
-
 
