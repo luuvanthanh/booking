@@ -1,3 +1,3 @@
 <?php 
-    header('Localhost: manager');
+    header('Localhost: /manager.blade.php');
 ?>
