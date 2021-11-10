@@ -59,9 +59,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $user = $this->find($id);
-            $booking = Booking::where('user_id', $user->id);
-            $booking->delete();
+            $user = $this->model->where('id', $id);
             $user->delete();    
 
             DB::commit();

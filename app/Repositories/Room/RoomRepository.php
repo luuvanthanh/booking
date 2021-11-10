@@ -52,7 +52,7 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $room = $this->find($id);
+            $room = $this->model->where('id', $id);
             $room->delete();
 
             DB::commit();

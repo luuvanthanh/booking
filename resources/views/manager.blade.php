@@ -80,11 +80,13 @@
                             <label class="form-to">From-to:</label>
                         </div>
                         <div class="col-md-5 box-time">
-                            @foreach ($fromTos as $fromTo)
-                                <label class="btn btn-outline-secondary" >
-                                    <input type="radio" class="from" value="{{ $fromTo->from_to }}" name="from_to">{{$fromTo->from_to}}
-                                </label>
-                            @endforeach 
+                            @if($fromTos)
+                                @foreach ($fromTos as $fromTo)
+                                    <label class="btn btn-outline-secondary" >
+                                        <input type="radio" class="from" value="{{ $fromTo->from_to }}" name="from_to">{{$fromTo->from_to}}
+                                    </label>
+                                @endforeach 
+                            @endif
                             @if ($errors->has('from_to'))
                                 <div class="error">{{ $errors->first('from_to') }}</div>
                             @endif

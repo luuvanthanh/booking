@@ -37,6 +37,6 @@ class SendEmail implements ShouldQueue
      */
     public function handle()
     {
-            FacadesMail::to(Auth::user()->email)->send(new MailNotify($this->data));
+        FacadesMail::to(Auth::user()->email)->send(new MailNotify($this->data));
     }
 }

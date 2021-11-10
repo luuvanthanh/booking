@@ -49,17 +49,14 @@ class DepartmentController extends Controller
     public function store(StoreDepartmentRequest $request)
     {
         try {
-            $department = Department::create([
-                'name' => $request->name,
-            ]);
+            $this->departmentRepo->create($request->all());
 
             return redirect()->route('department.index')->with('success', 'Thêm phòng ban thành công');
         } catch (\Exception $err) {
-            
+
             session()->flash('erorr', 'Thêm phòng ban thất bại');
             Log::info($err->getMessage());
         }
-        
     }
 
     /**
@@ -81,9 +78,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $department = Department::find($id);
         return view('departments.edit', [
-            'department' => $department,
+            'department' => $this->departmentRepo->find($id),
         ]);
     }
 
@@ -97,13 +93,11 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $department = Department::find($id);
-            $department->name = $request->name;
-            $department->save();
+            $this->departmentRepo->update($id, $request->all());
 
             return redirect()->route('department.index')->with('success', 'Update phòng ban thành công');
         } catch (\Exception $err) {
-
+            
             session()->flash('erorr', 'Update phòng ban thất bại');
             Log::info($err->getMessage());
         }
@@ -117,17 +111,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $user = User::find($id);
-            $department = Department::find($id);
-            $user->delete();
-            $department->delete();
+        $this->departmentRepo->delete($id);
 
-            return redirect()->route('department.index')->with('success', 'Xóa phòng ban thành công');
-        } catch (\Exception $err) {
-
-            session()->flash('erorr', 'Xóa phòng ban thất bại');
-            Log::info($err->getMessage());
-        }
+        return redirect()->route('department.index');
     }
 }
