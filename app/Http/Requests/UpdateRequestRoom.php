@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRoomRequest extends FormRequest
+class UpdateRequestRoom extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class StoreRoomRequest extends FormRequest
     {
         return [
             'roomNumber' => 'required|numeric',
-            'file' => 'required',
         ];
     }
 
@@ -34,7 +33,6 @@ class StoreRoomRequest extends FormRequest
         return [
             'roomNumber.required' => ':attribute không được để trống',
             'roomNumber.numeric' => ':attribute phải là kiểu số',
-            'file.required' => ':attribute không được để trống',
         ];
     }
 
@@ -42,7 +40,6 @@ class StoreRoomRequest extends FormRequest
     {
         return [
             'roomNumber' => 'Số phòng',
-            'file' => 'File ảnh',
         ];
     }
 }

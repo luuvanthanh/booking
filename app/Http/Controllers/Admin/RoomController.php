@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRequestRoom;
 use App\Repositories\Room\RoomRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -88,7 +89,7 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequestRoom $request, $id)
     {
         try {
             $this->roomRepo->update($id, $request->all());
@@ -96,7 +97,7 @@ class RoomController extends Controller
             return redirect()->route('room.index')->with('success', 'Update phòng họp thành công');
         } catch (\Exception $err) {
             
-            session()->flash('erorr', 'Chỉnh sữa phòng họp thất bại');
+            return redirect()->back()->with('error', $err->getMessage());
             Log::info($err->getMessage());
         }
     }

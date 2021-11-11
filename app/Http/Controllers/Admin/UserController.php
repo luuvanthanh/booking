@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -63,7 +64,7 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('success', 'Thêm người dùng thành công');
         } catch (\Exception $err) {
 
-            return back()-with('erorr', 'Thêm người dùng thất bại');
+            return redirect()->back()->with('error', $err->getMessage());
         }
     }
 
@@ -88,11 +89,15 @@ class UserController extends Controller
     {
         try {
             $user = $this->userRepo->find($id);
-            $departments = $this->departmentRepo->find($id);
+            $departments = $this->departmentRepo->getDepartment();
 
-            return view('users.edit', compact('user', 'departments'));
+            return view('users.edit', [
+                'user' => $user,
+                'departments' => $departments,
+            ]);
         } catch (\Exception $err) {
-            return back()-with('erorr', 'Thất bại');
+            
+            return redirect()->back()->with('error', $err->getMessage());
         }
     }
 
@@ -111,7 +116,8 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('success', 'Update người dùng thành công');
         } catch (\Exception $err) {
 
-            return back()-with('erorr', 'Thất bại');
+            return redirect()->back()->with('error', $err->getMessage());
+            Log::info($err->getMessage());
         }
     }
 

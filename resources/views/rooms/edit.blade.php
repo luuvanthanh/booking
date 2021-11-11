@@ -6,6 +6,9 @@
         <div class="form-group">
             <label>Room Number</label>
             <input type="text" class="form-control" name="roomNumber" value="{{ $room->roomNumber }}" placeholder="Enter Room number">
+            @if ($errors->has('roomNumber'))
+                <div class="error">{{ $errors->first('roomNumber') }}</div>
+            @endif
         </div>
         <div class="form-group">
             <label>People</label>

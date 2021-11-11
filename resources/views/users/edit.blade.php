@@ -54,9 +54,11 @@
                 <div class="form-group">
                     <label>Department</label>
                     <select class="form-control" name="department_id">
-                        @foreach ($departments as $departmentID => $departmentName)
-                            <option name="department_id" value="{{ $departmentID }}" {{  $user->department_id == $departmentID ? 'selected' : '' }}>{{ $departmentName }}</option>
-                        @endforeach
+                        @if(!empty($departments))
+                            @foreach ($departments as $departmentName)
+                                <option name="department_id" value="{{ $departmentName->id }}" {{  $user->department_id == $departmentName->id ? 'selected' : '' }}>{{ $departmentName->name }}</option>
+                            @endforeach
+                        @endif
                     </select>
                     @if ($errors->has('department_id'))
                         <div class="error">{{ $errors->first('department_id') }}</div>
