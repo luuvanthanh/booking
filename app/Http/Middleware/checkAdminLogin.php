@@ -19,7 +19,7 @@ class checkAdminLogin
     {
         if (Auth::user()) {
             $user = Auth::user();
-            if ($user->isAdmin == 1) {
+            if ($user->isAdmin == 1 or $user->isAdmin == 0) {
                 return $next($request);
             } else {
                 Auth::logout();

@@ -2,8 +2,11 @@
 <div class="login">
   <div class="login-header">
     <h1>Forgot password</h1>
+    @if (session('success'))
+        <span class="loi">{{ session('success') }}</span>
+    @endif
     </div>
-    <form action="" method="POST">
+    <form action="{{ route('forget.password.post') }}" method="POST">
         @csrf
         <div class="login-form">
             <h3>Username:</h3>
