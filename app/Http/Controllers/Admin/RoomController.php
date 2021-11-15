@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRequestRoom;
+use App\Http\Services\rooms\RoomService;
 use App\Repositories\Room\RoomRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class RoomController extends Controller
 {
-    protected $roomRepo;
+    protected $roomService;
 
-    public function __construct(RoomRepositoryInterface $roomRepo)
+    public function __construct(RoomService $roomService)
     {
-        $this->roomRepo = $roomRepo;
+        $this->roomService = $roomService;
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +26,7 @@ class RoomController extends Controller
     public function index()
     {
         return view('rooms.list',[
-            'rooms' => $this->roomRepo->getAll(),
+            'rooms' => $this->roomService->getAll(),
         ]);
     }
 
@@ -48,7 +49,7 @@ class RoomController extends Controller
     public function store(StoreRoomRequest $request)
     {
         try {
-            $this->roomRepo->create($request->all());
+            $this->roomService->create($request->all());
 
             return redirect()->route('room.index')->with('success', 'Thêm phòng họp thành công');
         } catch (\Exception $err) {
@@ -78,7 +79,7 @@ class RoomController extends Controller
     public function edit($id)
     {
         return view('rooms.edit',[
-            'room' => $this->roomRepo->find($id),
+            'room' => $this->roomService->find($id),
         ]);
     }
 
@@ -92,7 +93,7 @@ class RoomController extends Controller
     public function update(UpdateRequestRoom $request, $id)
     {
         try {
-            $this->roomRepo->update($id, $request->all());
+            $this->roomService->update($id, $request->all());
 
             return redirect()->route('room.index')->with('success', 'Update phòng họp thành công');
         } catch (\Exception $err) {
@@ -110,7 +111,7 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        $this->roomRepo->delete($id);
+        $this->roomService->delete($id);
 
         return redirect()->route('room.index');
     }

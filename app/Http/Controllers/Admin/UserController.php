@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRequestUser;
-use App\Models\Department;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Repositories\Department\DepartmentRepositoryInterface;
+use App\Http\Services\departments\DepartmentService;
+use App\Http\Services\users\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -14,14 +13,16 @@ class UserController extends Controller
 {
     protected $userRepo;
     protected $departmentRepo;
+    protected $userService;
+    protected $departmentService;
 
     public function __construct(
-        UserRepositoryInterface $userRepo,
-        DepartmentRepositoryInterface $departmentRepo
+        UserService $userService,
+        DepartmentService $departmentService,
     )
     {
-        $this->userRepo = $userRepo;
-        $this->departmentRepo = $departmentRepo;
+        $this->userService = $userService;
+        $this->departmentService = $departmentService;
     }
 
     /**
@@ -32,7 +33,7 @@ class UserController extends Controller
     public function index()
     {
         return view('users.list', [
-            'users' => $this->userRepo->getAll(),
+            'users' => $this->userService->getAll(),
         ]);
     }
 
@@ -46,7 +47,7 @@ class UserController extends Controller
         // $departments = Department::all();
         // return view('users.create', compact('departments'));
         return view('users.create', [
-            'departments' => $this->departmentRepo->getDepartment(),
+            'departments' => $this->departmentService->getDepartment(),
         ]);
     }
 
@@ -59,7 +60,7 @@ class UserController extends Controller
     public function store(StoreRequestUser $request)
     {
         try {
-            $user = $this->userRepo->create($request->all());
+            $user = $this->userService->create($request->all());
 
             return redirect()->route('user.index')->with('success', 'Thêm người dùng thành công');
         } catch (\Exception $err) {
@@ -88,8 +89,8 @@ class UserController extends Controller
     public function edit($id)
     {
         try {
-            $user = $this->userRepo->find($id);
-            $departments = $this->departmentRepo->getDepartment();
+            $user = $this->userService->find($id);
+            $departments = $this->departmentService->getDepartment();
 
             return view('users.edit', [
                 'user' => $user,
@@ -111,7 +112,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $user = $this->userRepo->update($id, $request->all());
+            $user = $this->userService->update($id, $request->all());
 
             return redirect()->route('user.index')->with('success', 'Update người dùng thành công');
         } catch (\Exception $err) {
@@ -129,7 +130,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $this->userRepo->delete($id);
+        $this->userService->delete($id);
 
         return redirect()->route('user.index');
     }
