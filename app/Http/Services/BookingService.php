@@ -29,7 +29,7 @@ class BookingService
         foreach ($booking as $book) {
             $checkFromTo = $book->from_to;
         }
-        $data = [
+        $dataBooking = [master
             'room_id' => $data['room_id'],
             'user_id' => Auth::user()->id,
             'date' => $date,
@@ -63,6 +63,19 @@ class BookingService
 
             return redirect()->back()->with('success', 'Bạn đã đặt phòng thành công');
         }
+        try {
+            Booking::create($dataBooking);
+            SendEmail::dispatch($message, $users);
+
+            return redirect()->back()->with('success', 'Bạn đã đặt phòng thành công');
+        } catch (\Exception $err) {
+            session()->flash('erorr', 'Đặt phòng thất bại');
+            Log::info($err->getMessage());
+            
+            return false;
+        }
+
+        return true;
     }
 
     public function checkRoom($idRoom, $date)
@@ -86,6 +99,27 @@ class BookingService
                         echo '</label>';    
                     } 
             }else {
+                    if (!empty($result)) {
+                        foreach ($result as $r) {
+                            echo '<label class="btn btn-outline-secondary" >';
+                            echo '<input type="radio" class="from" value="'.$r.'" name="from_to">';
+                            echo $r;
+                            echo '</label>';    
+                        } 
+                    }
+            }else {
+                if (!empty($fromTos)) {
+                    foreach ($fromTos as $from) {
+                        echo '<label class="btn btn-outline-secondary" >';
+                        echo '<input type="radio" class="from" value="'.$from->from_to.'" name="from_to">';
+                        echo $from->from_to;
+                        echo '</label>';
+                    }
+                }
+            }
+        } 
+        else {
+            if (!empty($fromTos)) {
                 foreach ($fromTos as $from) {
                     echo '<label class="btn btn-outline-secondary" >';
                     echo '<input type="radio" class="from" value="'.$from->from_to.'" name="from_to">';
