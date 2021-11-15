@@ -13,6 +13,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::class;
     }
 
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
     public function getAll()
     {
         $users = $this->model::paginate(config('app.paginate_user'));

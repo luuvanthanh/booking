@@ -4,19 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDepartmentRequest;
-use App\Models\Department;
-use App\Models\User;
-use App\Repositories\Department\DepartmentRepositoryInterface;
+use App\Http\Services\departments\DepartmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class DepartmentController extends Controller
 {
-    protected $departmentRepo;
+    protected $departmentService;
 
-    public function __construct(DepartmentRepositoryInterface $departmentRepo)
+    public function __construct(DepartmentService $departmentService)
     {
-        $this->departmentRepo = $departmentRepo;
+        $this->departmentService = $departmentService;
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +24,7 @@ class DepartmentController extends Controller
     public function index()
     {
         return view('departments.list',[
-            'departments' => $this->departmentRepo->getAll(),
+            'departments' => $this->departmentService->getAll(),
         ]);
     }
 
@@ -49,7 +47,7 @@ class DepartmentController extends Controller
     public function store(StoreDepartmentRequest $request)
     {
         try {
-            $this->departmentRepo->create($request->all());
+            $this->departmentService->create($request->all());
 
             return redirect()->route('department.index')->with('success', 'Thêm phòng ban thành công');
         } catch (\Exception $err) {
@@ -79,7 +77,7 @@ class DepartmentController extends Controller
     public function edit($id)
     {
         return view('departments.edit', [
-            'department' => $this->departmentRepo->find($id),
+            'department' => $this->departmentService->find($id),
         ]);
     }
 
@@ -93,7 +91,7 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $this->departmentRepo->update($id, $request->all());
+            $this->departmentService->update($id, $request->all());
 
             return redirect()->route('department.index')->with('success', 'Update phòng ban thành công');
         } catch (\Exception $err) {
@@ -111,7 +109,7 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $this->departmentRepo->delete($id);
+        $this->departmentService->delete($id);
 
         return redirect()->route('department.index');
     }

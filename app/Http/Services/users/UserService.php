@@ -3,6 +3,7 @@
 namespace App\Http\Services\users;
 
 use App\Models\User;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,46 @@ use Illuminate\Support\Str;
 
 class UserService
 {
-    public function create($request)
+    protected $userRepo;
+
+    public function __construct(UserRepositoryInterface $userRepo)
+    {
+        $this->userRepo = $userRepo;
+    }
+
+    public function find($id)
+    {
+        return $this->userRepo->find($id);
+    }
+
+    public function getAll()
+    {
+        $users = $this->userRepo->getAll();
+
+        return $users;
+    }
+
+    public function create($data)
+    {
+        $user = $this->userRepo->create($data);
+        return $user;
+    }
+
+    public function update($id, $data)
+    {
+        $user = $this->userRepo->update($id, $data);
+        
+        return $user;
+    }
+
+    public function delete($id)
+    {
+        $user = $this->userRepo->delete($id);
+
+        return $user;
+    }
+
+    public function register($request)
     {
         $request->except('_token', 'password_confirmation');
         $data = [

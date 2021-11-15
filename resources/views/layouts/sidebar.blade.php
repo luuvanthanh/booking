@@ -96,6 +96,16 @@
             </ul>
           </li> 
           @endif  
+
+          <li class="nav-item menu-open">
+            <a href="{{ route('home') }}" class="nav-link btn-secondary">
+              <i class="fas fa-home"></i>
+              <p>
+                Booking room
+              </p>
+            </a>
+          </li> 
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

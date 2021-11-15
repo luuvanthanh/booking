@@ -33,7 +33,7 @@ class RegisterController extends Controller
 
     public function postRegister(RegisterRequest $request)
     {
-        $this->userService->create($request);
+        $this->userService->register($request);
 
         return redirect()->route('getLogin');
     }

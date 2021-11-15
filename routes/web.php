@@ -8,6 +8,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,5 +63,8 @@ Route::post('booking', [BookingController::class, 'postRoom'])->name('postRoom')
 // Ajax
 Route::group(['prefix' => 'ajax'], function(){
    Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
+   Route::get('search/user/{searchVl}', [SearchController::class, 'searchUser']);
+   Route::get('search/room/{searchVl}', [SearchController::class, 'searchRoom']);
+   Route::get('search/department/{searchVl}', [SearchController::class, 'searchDepartment']);
 });
 
