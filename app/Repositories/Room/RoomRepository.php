@@ -15,17 +15,22 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 
     public function getAll()
     {
-        $rooms = $this->model::paginate(config('app.paginate_room'));
+        $rooms = $this->model->paginate(config('app.paginate_room'));
 
         return $rooms;
     }
 
     public function create($data)
     {
+        $thumbnailPath = null;
+        $image = $data['file'];
+        $extension = $image->extension();
+        $fileName = 'thumbnail_' . time() . '.' . $extension;
+        $thumbnailPath = $image->move('thumbnail', $fileName);
         $room = $this->model::create([
             'roomNumber' => $data['roomNumber'],
             'people' => $data['people'],
-            'avatar' => $data['thumb'],
+            'avatar' => $thumbnailPath,
             'status' => 1,
         ]);
         return $room;
@@ -52,7 +57,7 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
     {
         DB::beginTransaction();
         try {
-            $room = $this->find($id);
+            $room = $this->model->where('id', $id);
             $room->delete();
 
             DB::commit();
