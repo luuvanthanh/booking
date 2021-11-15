@@ -17,15 +17,15 @@ class BookingService
         $checkFromTo = null;
         $checkDate = null;
         $date = date('Y-m-d', strtotime($data['date']));
-        $booking =DB::table('bookings')->where('room_id', $data['room_id'])->get();
+        $booking = Booking::where('room_id', $data['room_id'])->get();
         foreach ($booking as $book) {
             $checkRoom = $book->room_id;
         }
-        $booking =DB::table('bookings')->where('date', $date)->get();
+        $booking = Booking::where('date', $date)->get();
         foreach ($booking as $book) {
             $checkDate = $book->date;
         }
-        $booking =DB::table('bookings')->where('from_to', $data['from_to'])->get();
+        $booking = Booking::where('from_to', $data['from_to'])->get();
         foreach ($booking as $book) {
             $checkFromTo = $book->from_to;
         }
@@ -39,7 +39,6 @@ class BookingService
         ];
         $users = Auth::user()->email;
         $message = [];
-        // SendEmail::dispatch($message, $users);
         if ($checkRoom != null) {
             if ($checkDate != null) {
                 if ($checkFromTo != null) {

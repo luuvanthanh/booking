@@ -8,9 +8,9 @@ use App\Models\User;
 
 class searchService 
 {
-    public function searchUser($searchVl)
+    public function searchUser($value)
     {
-        $users = User::with('department')->where('name', 'like', '%' . $searchVl . '%')->orWhere('email', 'like', '%' . $searchVl . '%')->paginate(config('app.paginate_user'));
+        $users = User::with('department')->where('name', 'like', '%' . $value . '%')->orWhere('email', 'like', '%' . $value . '%')->paginate(config('app.paginate_user'));
         echo '<table class="table">';
             echo '<thead>
             <tr>
@@ -58,9 +58,9 @@ class searchService
         echo  '</table>';
     }
 
-    public function searchRoom($searchVl)
+    public function searchRoom($value)
     {
-        $rooms = Room::where('roomNumber', 'like', '%' . $searchVl . '%')->orWhere('people', 'like', '%' . $searchVl . '%')->paginate(config('app.paginate_room'));
+        $rooms = Room::where('roomNumber', 'like', '%' . $value . '%')->orWhere('people', 'like', '%' . $value . '%')->paginate(config('app.paginate_room'));
 
         echo '<table class="table">';
         echo '<thead>
@@ -105,9 +105,9 @@ class searchService
         echo '</table>';
     }
 
-    public function searchDepartment($searchVl)
+    public function searchDepartment($value)
     {
-        $departments = Department::where('name', 'like', '%' .$searchVl. '%')->paginate(config('app.paginate_department'));
+        $departments = Department::where('name', 'like', '%' .$value. '%')->paginate(config('app.paginate_department'));
 
         echo '<table class="table">';
         echo '<thead>

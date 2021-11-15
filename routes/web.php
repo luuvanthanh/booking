@@ -63,8 +63,8 @@ Route::post('booking', [BookingController::class, 'postRoom'])->name('postRoom')
 // Ajax
 Route::group(['prefix' => 'ajax'], function(){
    Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
-   Route::get('search/user/{searchVl}', [SearchController::class, 'searchUser']);
-   Route::get('search/room/{searchVl}', [SearchController::class, 'searchRoom']);
-   Route::get('search/department/{searchVl}', [SearchController::class, 'searchDepartment']);
+   Route::get('search/user/{value}', [SearchController::class, 'searchUser']);
+   Route::get('search/room/{value}', [SearchController::class, 'searchRoom']);
+   Route::get('search/department/{value}', [SearchController::class, 'searchDepartment']);
 });
 

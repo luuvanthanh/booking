@@ -17,21 +17,21 @@ class SearchController extends Controller
         $this->searchService = $searchService;
     }
 
-    public function searchUser($searchVl)
+    public function searchUser($value)
     {
-        $users = $this->searchService->searchUser($searchVl);
+        $users = $this->searchService->searchUser($value);
 
         return $users;
     }
 
-    public function searchRoom($searchVl) {
-        $rooms = $this->searchService->searchRoom($searchVl);
+    public function searchRoom($value) {
+        $rooms = $this->searchService->searchRoom($value);
 
         return $rooms;
     }
 
-    public function searchDepartment($searchVl) {
-        $departments = $this->searchService->searchDepartment($searchVl);
+    public function searchDepartment($value) {
+        $departments = $this->searchService->searchDepartment($value);
 
         return $departments;
     }

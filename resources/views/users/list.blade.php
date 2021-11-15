@@ -76,8 +76,8 @@
 <script>
 $(document).ready(function() {
     $("#search").keyup(function(){
-        var searchVl = $(this).val();
-        $.get("/ajax/search/user/"+searchVl, function(data){
+        var value = $(this).val();
+        $.get("/ajax/search/user/"+value, function(data){
                 $(".table").html(data);
         });
     });
