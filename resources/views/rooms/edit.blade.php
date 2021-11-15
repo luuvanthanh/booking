@@ -6,6 +6,9 @@
         <div class="form-group">
             <label>Room Number</label>
             <input type="text" class="form-control" name="roomNumber" value="{{ $room->roomNumber }}" placeholder="Enter Room number">
+            @if ($errors->has('roomNumber'))
+                <div class="error">{{ $errors->first('roomNumber') }}</div>
+            @endif
         </div>
         <div class="form-group">
             <label>People</label>
@@ -13,10 +16,11 @@
         </div>
         <div class="form-group">
             <label>Avartar</label>
-            <input type="file" class="form-control"  name="file" id="upload" placeholder="Enter Room number">
-            <div id="image_show">
+            <input type="file" class="form-control" value="{{$room->avatar}}" name="file" id="upload" placeholder="Enter Room number">
+            <!-- <div id="image_show">
                 <img src="{{ $room->avatar }}" style="width: 100px; height:100px;" alt="">
-            </div>
+            </div> -->
+            <img src="/{{ $room->avatar }}" style="width: 100px; height:100px;" alt="">
             <input type="hidden" name="thumb" value="{{ $room->avatar }}" id="file">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
@@ -26,7 +30,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $("#upload").change(function(){
             const form = new FormData();
@@ -49,4 +53,4 @@
             });
         });
     });
-</script>
+</script> -->
