@@ -5,7 +5,7 @@ namespace App\Http\Services\departments;
 use App\Models\Department;
 use App\Repositories\Department\DepartmentRepositoryInterface;
 
-class DepartmentService 
+class DepartmentService
 {
     protected $departmentRepo;
 

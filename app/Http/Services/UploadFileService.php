@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-class UploadFileService 
+class UploadFileService
 {
     public function store($request)
     {

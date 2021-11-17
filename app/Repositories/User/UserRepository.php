@@ -27,15 +27,18 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function create($data)
     {
-        $user = $this->model::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'address' => $data['address'],
-            'phone' => $data['phone'],
-            'isAdmin' => $data['isAdmin'],
-            'department_id' => $data['department_id'],
-        ]);
+        $user = $this->model::create(
+            [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'address' => $data['address'],
+                'phone' => $data['phone'],
+                'isAdmin' => $data['isAdmin'],
+                'department_id' => $data['department_id'],
+            ]
+        );
+        
         return $user;
     }
 
@@ -44,15 +47,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $user = $this->model->find($id);
 
         if ($user) {
-            $user->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
-                'address' => $data['address'],
-                'phone' => $data['phone'],
-                'isAdmin' => $data['isAdmin'],
-                'department_id' => $data['department_id'],
-            ]);
+            $user->update(
+                [
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => bcrypt($data['password']),
+                    'address' => $data['address'],
+                    'phone' => $data['phone'],
+                    'isAdmin' => $data['isAdmin'],
+                    'department_id' => $data['department_id'],
+                ]
+            );
 
             return true;
         }

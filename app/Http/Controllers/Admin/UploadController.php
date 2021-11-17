@@ -19,14 +19,18 @@ class UploadController extends Controller
     {
         $image = $this->uploadService->store($request);
         if ($image != false) {
-            return response()->json([
-                'error' => false,
-                'url' => $image,
-            ]);
+            return response()->json(
+                [
+                    'error' => false,
+                    'url' => $image,
+                ]
+            );
         }
 
-        return response()->json([
-            'error' => true,
-        ]);
+        return response()->json(
+            [
+                'error' => true,
+            ]
+        );
     }
 }

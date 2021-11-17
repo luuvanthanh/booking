@@ -28,6 +28,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Room\RoomRepositoryInterface::class,
             \App\Repositories\Room\RoomRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\Booking\BookingRepositoryInterface::class,
+            \App\Repositories\Booking\BookingRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\FromTo\FromToRepositoryInterface::class,
+            \App\Repositories\FromTo\FromToRepository::class
+        );
     }
 
     /**

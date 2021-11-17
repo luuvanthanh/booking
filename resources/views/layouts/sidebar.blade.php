@@ -28,7 +28,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @if(Auth::user()->isAdmin == 1)
           
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
@@ -40,7 +39,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link active">
+                <a href="/listUser" class="nav-link active">
                   <p>List User</p>
                 </a>
               </li>
@@ -62,7 +61,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('room.index') }}" class="nav-link active">
+                <a href="/listRoom" class="nav-link active">
                   <p>List Room</p>
                 </a>
               </li>
@@ -84,7 +83,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('department.index') }}" class="nav-link active">
+                <a href="/listDepartment" class="nav-link active">
                   <p>List Department</p>
                 </a>
               </li>
@@ -95,7 +94,6 @@
               </li>
             </ul>
           </li> 
-          @endif  
 
           <li class="nav-item menu-open">
             <a href="{{ route('home') }}" class="nav-link btn-secondary">

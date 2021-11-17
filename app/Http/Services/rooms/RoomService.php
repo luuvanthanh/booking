@@ -4,7 +4,7 @@ namespace App\Http\Services\rooms;
 
 use App\Repositories\Room\RoomRepositoryInterface;
 
-class RoomService 
+class RoomService
 {
     protected $roomRepo;
 

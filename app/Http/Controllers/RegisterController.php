@@ -26,9 +26,10 @@ class RegisterController extends Controller
 
     public function getRegister()
     {
-        return view('register', [
-            'departments' => $this->departmentService->getDepartment()
-        ]);
+        return view(
+            'register', [
+            'departments' => $this->departmentService->getDepartment()]
+        );
     }
 
     public function postRegister(RegisterRequest $request)

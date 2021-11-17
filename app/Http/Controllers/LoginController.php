@@ -11,23 +11,24 @@ class LoginController extends Controller
 {
     public function getLogin()
     {
-       return view('login');
+        return view('login');
     }
 
     public function postLogin(LoginRequest $request) 
     {
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        $credentials = $request->only('email', 'password');
+        if (auth()->attempt($credentials)) {
            
-           session()->flash('success', 'Đăng nhập thành công');
-           return redirect()->route('home');
-        } else {
-            return back()->with('error', 'Email hoặc mật khẩu không chính xác');
+            session()->flash('success', 'Đăng nhập thành công');
+            return redirect()->route('home');
         }
+            
+            return back()->with('error', 'Email hoặc mật khẩu không chính xác');
     }
 
     public function logout()
     {
-        Auth::logout(); 
+        auth()->logout(); 
         return redirect()->route('getLogin');
     }
 }

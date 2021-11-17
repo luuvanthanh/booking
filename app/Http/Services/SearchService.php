@@ -6,7 +6,7 @@ use App\Models\Department;
 use App\Models\Room;
 use App\Models\User;
 
-class searchService 
+class searchService
 {
     public function searchUser($value)
     {
@@ -24,8 +24,8 @@ class searchService
             </tr>
             </thead>';
         echo '<tbody>';
-     foreach($users as $user) {
-        echo '<tr>
+        foreach($users as $user) {
+            echo '<tr>
             <th scope="row">'. $user->id .'</th>
             <td>'. $user->name .'</td>
             <td>'. $user->email .'</td>
@@ -73,7 +73,7 @@ class searchService
             </tr>
             </thead>';
         echo '<tbody>';
-            foreach($rooms as $room)
+        foreach($rooms as $room)
             { 
                 echo '<tr>
                     <th scope="row">'. $room->id.'</th>
@@ -100,7 +100,7 @@ class searchService
                         </form>
                     </td>
                 </tr>';
-            }
+        }
         echo '</tbody>';
         echo '</table>';
     }
@@ -118,7 +118,7 @@ class searchService
             </tr>
             </thead>';
         echo '<tbody>';
-            foreach($departments as $department)
+        foreach($departments as $department)
             { 
                 echo '<tr>
                     <th scope="row">'. $department->id.'</th>
@@ -143,7 +143,7 @@ class searchService
                         </form>
                     </td>
                 </tr>';
-            }
+        }
         echo '</tbody>';
         echo '</table>';
     }

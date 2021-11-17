@@ -32,9 +32,11 @@ class DepartmentRepository extends BaseRepository implements DepartmentRepositor
 
     public function create($data)
     {
-        $department = $this->model::create([
-            'name' => $data['name'],
-        ]);
+        $department = $this->model::create(
+            [
+                'name' => $data['name'],
+            ]
+        );
 
         return $department;
     }
@@ -43,9 +45,11 @@ class DepartmentRepository extends BaseRepository implements DepartmentRepositor
     {
         $department = $this->model->find($id);
         if($department) {
-            $department->update([
-                'name' => $data['name'],
-            ]);
+            $department->update(
+                [
+                    'name' => $data['name'],
+                ]
+            );
 
             return true;
         }

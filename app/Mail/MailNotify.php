@@ -10,29 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class MailNotify extends Mailable
 {
-   use Queueable, SerializesModels;
+    use Queueable, SerializesModels;
 
-   public $data;
-   /**
-    * Create a new data instance.
-    *
-    * @return void
-    */
+    public $data;
 
-   public function __construct($data)
-   {
-       $this->data = $data;
-   }
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
 
-   /**
-    * Build the message.
-    *
-    * @return $this
-    */
-   public function build()
-   {
-       return $this->from(Auth::user()->email)
-           ->view('email.booking')
-           ->subject('Book Room');
-   }
+    public function build()
+    {
+        return $this->from(Auth::user()->email)
+            ->view('email.booking')
+            ->subject('Book Room');
+    }
 }
