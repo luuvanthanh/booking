@@ -35,3 +35,11 @@ Route::get('forgotPassword', [RegisterController::class, 'showForgetPasswordForm
 Route::post('forgotPassword', [RegisterController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [RegisterController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [RegisterController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+// Ajax
+Route::group(['prefix' => 'ajax'], function(){
+    Route::get('room/{idRoom}/{date}', [BookingController::class, 'getRoom']);
+    Route::get('search/user/{searchVl}', [SearchController::class, 'searchUser']);
+    Route::get('search/room/{searchVl}', [SearchController::class, 'searchRoom']);
+    Route::get('search/department/{searchVl}', [SearchController::class, 'searchDepartment']);
+ });
