@@ -24,7 +24,7 @@
                 @if ($errors->has('email'))
                     <div class="error">{{ $errors->first('email') }}</div>
                 @endif
-            </div>
+                </div>
         
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
