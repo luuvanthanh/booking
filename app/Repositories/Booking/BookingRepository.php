@@ -74,8 +74,8 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
     public function checkRoom($idRoom, $date)
     {
         $date = date('Y-m-d', strtotime($date));
-        $collection = $this->model->where('room_id', $idRoom)->get();
-        $getDate = $this->model->where('date', $date)->get();
+        $collection = Booking::where('room_id', $idRoom)->get();
+        $getDate = Booking::where('date', $date)->get();
         $fromTo = FromTo::Pluck('from_to');
         $fromTos = FromTo::all();
         $result = ''; 
@@ -83,27 +83,30 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
         $isEmptyDate = $getDate->isEmpty();
         if ($isEmpty == false) {
             if ($isEmptyDate == false) {
-                $getFromToByDate = $this->model->where('date', $date)->where('room_id', $idRoom)->Pluck('from_to');
+                $getFromToByDate = Booking::where('date', $date)->where('room_id', $idRoom)->Pluck('from_to');
                     $result = $fromTo->diff($getFromToByDate);
-                foreach ($result as $r) {
+                    foreach ($result as $r) {
+                        echo '<label class="btn btn-outline-secondary" >';
+                        echo '<input type="radio" class="from" value="'.$r.'" name="from_to">';
+                        echo $r;
+                        echo '</label>';    
+                    } 
+            }else {
+                foreach ($fromTos as $from) {
                     echo '<label class="btn btn-outline-secondary" >';
-                    echo '<input type="radio" class="from" value="'.$r.'" name="from_to">';
-                    echo $r;
-                    echo '</label>';    
-                } 
+                    echo '<input type="radio" class="from" value="'.$from->from_to.'" name="from_to">';
+                    echo $from->from_to;
+                    echo '</label>';
+                }
             }
+        } 
+        else {
             foreach ($fromTos as $from) {
                 echo '<label class="btn btn-outline-secondary" >';
                 echo '<input type="radio" class="from" value="'.$from->from_to.'" name="from_to">';
                 echo $from->from_to;
                 echo '</label>';
             }
-        } 
-        foreach ($fromTos as $from) {
-            echo '<label class="btn btn-outline-secondary" >';
-            echo '<input type="radio" class="from" value="'.$from->from_to.'" name="from_to">';
-            echo $from->from_to;
-            echo '</label>';
         }
     }
 }

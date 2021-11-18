@@ -47,7 +47,11 @@
                             <label>Date:</label>
                         </div>
                         <div class="col-md-2">
-                            <input type="text" name="date" value="{{ old('date') }}" id="datepicker" class="form-control">
+                            @php
+                                $date = now()->toDateString();
+                                $formatDate = date('d-m-Y', strtotime($date))
+                            @endphp
+                            <input type="text" name="date" value="{{ $formatDate }}" id="datepicker" class="form-control">
                             @if ($errors->has('date'))
                                 <div class="error">{{ $errors->first('date') }}</div>
                             @endif
@@ -125,14 +129,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
 $(document).ready(function() {
+    var currentTime = new Date()
+    var month = currentTime.getMonth() + 1;
+    var day = currentTime.getDate();
+    var year = currentTime.getFullYear()
+    var toDay = day+'-'+month+'-'+year;
     $("#room").change(function(){
         var idRoom = $(this).val();
-        $("#datepicker").change(function(){
-            var date = $(this).val();
+        var date = $("input[name='date']").val();
+        if (date == toDay) {
             $.get("ajax/room/"+idRoom+"/"+date, function(data){
                 $(".box-time").html(data);
             });
-            
+        }
+        $("#datepicker").change(function(){
+            let date = $(this).val();
+            $.get("ajax/room/"+idRoom+"/"+date, function(data){
+                $(".box-time").html(data);
+            });
         });
     });
 });

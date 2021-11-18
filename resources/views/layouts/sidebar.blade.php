@@ -28,7 +28,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          
+        @if(Auth::user()->isAdmin == 0)
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="fas fa-users"></i>
@@ -94,7 +94,7 @@
               </li>
             </ul>
           </li> 
-
+          @endif
           <li class="nav-item menu-open">
             <a href="{{ route('home') }}" class="nav-link btn-secondary">
               <i class="fas fa-home"></i>
@@ -103,7 +103,6 @@
               </p>
             </a>
           </li> 
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
