@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class checkAdminLogin
+class checkIsAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,16 +17,10 @@ class checkAdminLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()) {
-            $user = Auth::user();
-            if ($user->isAdmin == 1) {
-                return $next($request);
-            } else {
-                Auth::logout();
-                return redirect()->route('getLogin');
-            }
-        } else {
-            return redirect()->route('getLogin');
+        if (Auth::user()->isAdmin == 0)
+        {
+            return $next($request);
         }
+            return redirect()->back()->with('error', 'Bạn không có quyền truy cập vào trang này');
     }
 }
