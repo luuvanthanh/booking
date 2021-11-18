@@ -35,3 +35,6 @@ Route::get('forgotPassword', [RegisterController::class, 'showForgetPasswordForm
 Route::post('forgotPassword', [RegisterController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [RegisterController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [RegisterController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+// Department
+Route::resource('department', DepartmentController::class);
