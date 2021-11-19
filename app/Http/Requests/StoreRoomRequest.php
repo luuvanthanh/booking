@@ -24,7 +24,7 @@ class StoreRoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'roomNumber' => 'required|numeric',
+            'roomNumber' => 'required|numeric|unique:rooms',
             'file' => 'required',
         ];
     }
@@ -34,6 +34,7 @@ class StoreRoomRequest extends FormRequest
         return [
             'roomNumber.required' => ':attribute không được để trống',
             'roomNumber.numeric' => ':attribute phải là kiểu số',
+            'roomNumber.unique' => ':attribute phải là duy nhất',
             'file.required' => ':attribute không được để trống',
         ];
     }

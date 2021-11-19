@@ -4,6 +4,7 @@ namespace App\Repositories\Room;
 use App\Models\Room;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\DB;
+use File;
 
 class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 {
@@ -31,32 +32,49 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
     {
         $thumbnailPath = null;
         $image = $data['file'];
+        $file_type = $image->getMimeType();
         $extension = $image->extension();
         $fileName = 'thumbnail_' . time() . '.' . $extension;
-        $thumbnailPath = $image->move('thumbnail', $fileName);
-        $room = $this->model::create(
-            [
-                'roomNumber' => $data['roomNumber'],
-                'people' => $data['people'],
-                'avatar' => $thumbnailPath,
-                'status' => 1,
-            ]
-        );
-        return $room;
+        if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif') {
+            $thumbnailPath = $image->move('thumbnail', $fileName);
+            $room = $this->model::create(
+                [
+                    'roomNumber' => $data['roomNumber'],
+                    'people' => $data['people'],
+                    'avatar' => $thumbnailPath,
+                    'status' => 1,
+                ]
+            );
+            return $room;
+        }
+
+        return false;
     }
 
     public function update($id, $data)
     {
         $room = $this->find($id);
-        if ($room) {
-            $room->update(
-                [
-                    'roomNumber' => $data['roomNumber'],
-                    'people' => $data['people'],
-                    'avatar' => $data['thumb'],
-                    'status' => 1,
-                ]
-            );
+        $thumbnailOld = $room->avatar;
+        $thumbnailPath = null;
+        $image = $data['file'];
+        $file_type = $image->getMimeType();
+        $extension = $image->extension();
+        $fileName = 'thumbnail_' . time() . '.' . $extension;
+        if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif') {
+            $thumbnailPath = $image->move('thumbnail', $fileName);
+            if ($room) {
+                $room->update(
+                    [
+                        'roomNumber' => $data['roomNumber'],
+                        'people' => $data['people'],
+                        'avatar' => $thumbnailPath,
+                        'status' => 1,
+                    ]
+                );
+                if (File::exists(public_path($thumbnailOld))) {
+                    File::delete(public_path($thumbnailOld));
+                }
+            }
 
             return true;
         }

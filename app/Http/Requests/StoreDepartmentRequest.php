@@ -24,7 +24,7 @@ class StoreDepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:departments',
         ];
     }
 
@@ -32,6 +32,7 @@ class StoreDepartmentRequest extends FormRequest
     {
         return [
             'name.required' => ':attribute không được để trống',
+            'name.unique' => ':attribute phải là duy nhất',
         ];
     }
 
