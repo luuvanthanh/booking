@@ -54,7 +54,6 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
     public function update($id, $data)
     {
         $room = $this->find($id);
-        $thumbnailOld = $room->avatar;
         $thumbnailPath = null;
         $image = $data['file'];
         $file_type = $image->getMimeType();
@@ -71,9 +70,6 @@ class RoomRepository extends BaseRepository implements RoomRepositoryInterface
                         'status' => 1,
                     ]
                 );
-                if (File::exists(public_path($thumbnailOld))) {
-                    File::delete(public_path($thumbnailOld));
-                }
             }
 
             return true;
